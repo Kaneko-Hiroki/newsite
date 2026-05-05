@@ -3,163 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HADO Recruit 2026</title>
+  <title>HADO Recruiting Mock</title>
   <style>
-    :root{--blue:#1147ff;--ink:#10131f;--muted:#6a7188;--line:#e8ebf5;--bg:#f8f9fd}
-    *{box-sizing:border-box} body{margin:0;font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:white}
-    .container{width:min(1180px,92vw);margin-inline:auto}
-    header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);z-index:30;border-bottom:1px solid #f0f2f8}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{font-weight:900;color:var(--blue);font-size:42px;letter-spacing:.04em}.logo small{font-size:18px;margin-left:8px;font-weight:700}
-    .menu{display:flex;gap:30px;align-items:center;font-size:13px;font-weight:800}
-    .menu a{color:#222;text-decoration:none}.entry{background:var(--blue);color:#fff!important;padding:18px 24px;border-radius:2px}
+    :root{--blue:#0a36e8;--line:#d6dcf6;--text:#0c0c13}
+    *{box-sizing:border-box}
+    body{margin:0;background:#fff;color:var(--text);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
+    .page{width:100%;min-height:100vh;overflow:hidden;position:relative}
+    header{height:82px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 48px;background:#fff}
+    .logo{font-weight:800;letter-spacing:.12em;font-size:52px;line-height:1}
+    .nav{display:flex;align-items:stretch;height:100%}
+    .nav a{display:flex;flex-direction:column;justify-content:center;padding:0 26px;text-decoration:none;color:#111;font-weight:700;font-size:35px;line-height:1.05}
+    .nav small{font-size:13px;font-weight:600;margin-top:8px}
+    .entry{background:var(--blue)!important;color:#fff!important;min-width:170px;position:relative}
+    .entry::after{content:"→";position:absolute;right:18px;top:26px;font-size:32px}
 
-    .hero{background:linear-gradient(130deg,#fff 55%,#f4f7ff 100%);padding:48px 0 26px;position:relative;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:end}
-    .title{font-family:serif;font-size:96px;line-height:1.03;margin:0 0 24px;letter-spacing:.01em}
-    .underline{height:7px;background:var(--blue);width:88%;border-radius:9px;transform:rotate(-5deg);margin-bottom:30px}
-    .chips{display:flex;gap:10px;flex-wrap:wrap}.chip{background:#0a1020;color:#fff;padding:8px 12px;font-size:18px;font-weight:700}
-    .lead{margin-top:26px;color:#2a3044;font-size:24px;line-height:1.8}
-    .brush{font-size:92px;color:var(--blue);font-weight:900;font-family:cursive;opacity:.9;margin-top:26px}
-    .photo-montage{position:relative;height:620px;background:radial-gradient(circle at 70% 30%,#1f58ff 0 90px,transparent 91px),linear-gradient(160deg,#d8e3ff,transparent 50%);border:1px solid #d8dff8}
-    .person{position:absolute;bottom:0;filter:grayscale(1) contrast(1.12)}
-    .p1{left:28%;height:95%}.p2{right:2%;height:66%}.p3{left:2%;height:55%}
-    .person img{height:100%;width:auto;object-fit:cover}
+    .hero{position:relative;height:calc(100vh - 82px);min-height:860px;padding:68px 68px 40px;background:#fff}
+    .dots{position:absolute;width:220px;height:160px;background-image:radial-gradient(#9ab0ff 1.4px,transparent 1.4px);background-size:20px 20px;opacity:.95}
+    .d1{top:54px;left:51%}.d2{top:370px;left:57%}.d3{top:120px;right:90px}
+    .wire,.wire2,.wire3{position:absolute;border:1px solid #9bb0ff;opacity:.8}
+    .wire{right:334px;top:18px;width:540px;height:890px}
+    .wire2{left:46%;top:420px;width:420px;height:630px}
+    .wire3{left:58%;bottom:-130px;width:680px;height:680px;transform:rotate(45deg)}
 
-    section{padding:74px 0;border-top:1px solid var(--line)}
-    h2{font-size:52px;margin:0 0 16px;font-family:serif}.sub{font-size:56px;color:var(--blue);font-family:serif;margin:10px 0}
-    .two{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
-    .block{background:#fff;border:1px solid var(--line);padding:30px}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:#fff;border:1px solid var(--line);padding:36px 24px;min-height:230px;text-align:center}
-    .icon{font-size:42px;color:var(--blue)}
-    .kicker{font-size:18px;font-weight:800;margin:12px 0}.desc{color:#3c445f;line-height:1.8}
-    .timeline{height:320px;border:1px solid var(--line);background:linear-gradient(0deg,#f5f7ff,#fff);position:relative;overflow:hidden}
-    .curve{position:absolute;left:10%;right:6%;bottom:70px;height:150px;border-bottom:5px solid var(--blue);border-right:5px solid var(--blue);border-radius:0 0 220px 0}
-    .dot{position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid var(--blue)}
-    .d1{left:18%;bottom:64px}.d2{left:44%;bottom:96px}.d3{left:70%;bottom:132px}
-    .process{display:grid;grid-template-columns:1.1fr 2fr;gap:20px;align-items:center}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{border:1px solid var(--line);padding:22px;text-align:center}
-    .strengths{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.strength{border:1px solid var(--line);padding:20px;text-align:center;min-height:190px}
-    .cta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:end}
-    .cta .panel{min-height:220px;background:#eef2ff;border:1px solid var(--line)}
-    .cta-main{padding:20px;border:1px solid var(--line);min-height:220px;display:flex;flex-direction:column;justify-content:center}
-    .buttons{display:flex;gap:12px;margin-top:20px}.btn{padding:14px 24px;border:2px solid var(--blue);font-weight:800;text-decoration:none}.btn.primary{background:var(--blue);color:white}.btn.secondary{color:var(--blue)}
-    footer{border-top:1px solid var(--line);padding:24px 0 0}.footer-grid{display:grid;grid-template-columns:2fr repeat(6,1fr);gap:16px;align-items:start}.copyright{background:#090b11;color:#fff;text-align:center;padding:11px;margin-top:18px}
+    .left{position:relative;z-index:2;max-width:760px}
+    .eyebrow{color:var(--blue);font-size:40px;font-weight:800;letter-spacing:.03em}
+    .eyebrow::after{content:"";display:block;width:42px;height:6px;background:var(--blue);margin-top:18px}
+    h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:132px;line-height:1.02;letter-spacing:.02em;margin:42px 0 20px;font-weight:500}
+    .brush{height:16px;width:530px;background:var(--blue);border-radius:50px;transform:rotate(-5deg);margin:-22px 0 44px}
+    .lead{font-size:49px;line-height:1.35;margin:0 0 12px;font-weight:500}
+    .lead strong{color:var(--blue);font-weight:800}
+    .sub{font-size:43px;line-height:1.6;margin:0}
+    .tag{display:inline-block;margin-top:26px;background:#05070d;color:#fff;padding:8px 14px;font-size:46px;letter-spacing:.02em}
+    .buttons{display:flex;gap:26px;margin-top:52px}
+    .btn{font-size:40px;font-weight:700;padding:24px 54px;min-width:450px;text-decoration:none;display:flex;justify-content:center;align-items:center;border:2px solid var(--blue)}
+    .primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:var(--blue)}
+    .btn span{margin-left:auto;font-size:58px;line-height:0.8}
 
-    @media (max-width: 980px){
-      .menu{display:none}.hero-grid,.two,.process{grid-template-columns:1fr}
-      .title{font-size:62px}.cards{grid-template-columns:1fr}.strengths{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
-      .photo-montage{height:420px}
+    .visual{position:absolute;right:-24px;bottom:0;width:58%;height:100%;z-index:1}
+    .bluebar{position:absolute;left:31%;top:0;bottom:0;width:210px;background:var(--blue)}
+    .portrait{position:absolute;bottom:0;filter:grayscale(1) contrast(1.1);object-fit:cover}
+    .woman{height:80%;left:4%}.man{height:96%;right:0}
+    .panel{position:absolute;right:60px;bottom:96px;width:470px;background:rgba(0,0,0,.56);color:#fff;border:1px solid rgba(180,196,255,.4);padding:18px 22px;font-size:21px;line-height:1.6}
+    .panel hr{border:none;border-top:1px solid rgba(255,255,255,.25);margin:14px 0}
+
+    @media (max-width:1200px){
+      .logo{font-size:40px}.nav a{font-size:24px}
+      h1{font-size:86px}.lead{font-size:34px}.sub{font-size:29px}.tag,.btn{font-size:28px}
+      .hero{min-height:680px}.buttons{flex-direction:column}.btn{min-width:320px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="logo">HADO <small>RECRUIT 2026</small></div>
-      <nav class="menu">
-        <a href="#">ABOUT</a><a href="#">BUSINESS</a><a href="#">CULTURE</a><a href="#">PEOPLE</a><a href="#">JOBS</a><a class="entry" href="#">ENTRY</a>
+  <div class="page">
+    <header>
+      <div class="logo">HADO</div>
+      <nav class="nav">
+        <a href="#">ABOUT<small>私たちについて</small></a>
+        <a href="#">CULTURE<small>カルチャー</small></a>
+        <a href="#">WORK<small>事業・仕事を知る</small></a>
+        <a href="#">MEMBER<small>メンバー紹介</small></a>
+        <a class="entry" href="#">ENTRY<small>エントリー</small></a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <section class="hero" style="border-top:none">
-    <div class="container hero-grid">
-      <div>
-        <h1 class="title">世界を<br>前に進める<br>表現者へ</h1>
-        <div class="underline"></div>
-        <p class="lead"><b style="color:var(--blue)">HADO</b> は、<b style="color:var(--blue)">AI MARKETING FUND</b>になる。</p>
-        <div class="chips"><span class="chip">AI</span><span class="chip">Marketing</span><span class="chip">new Ventures</span></div>
-        <p class="lead" style="font-size:22px">AIとマーケティングの力で、いろんな事業を創造していく。</p>
-        <div class="brush">HADO</div>
+    <section class="hero">
+      <div class="dots d1"></div><div class="dots d2"></div><div class="dots d3"></div>
+      <div class="wire"></div><div class="wire2"></div><div class="wire3"></div>
+      <div class="left">
+        <p class="eyebrow">HADO RECRUITING</p>
+        <h1>世界を前に進める<br>表現者へ。</h1>
+        <div class="brush"></div>
+        <p class="lead"><strong>HADO</strong> は、 <strong>AI MARKETING FUND</strong>へ。</p>
+        <p class="sub">AIとマーケティングの力で事業を創造し、<br>爆速で意思決定し、爆速で成長する。<br>M&A・新規事業創出を通じて、社会課題を解く。</p>
+        <div class="tag">AI × Marketing × New Ventures</div>
+        <div class="buttons">
+          <a class="btn primary" href="#">募集職種を見る <span>→</span></a>
+          <a class="btn secondary" href="#">会社を知る <span>→</span></a>
+        </div>
       </div>
-      <div class="photo-montage">
-        <div class="person p1"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="person"></div>
-        <div class="person p2"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="person"></div>
-        <div class="person p3"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=420&q=80" alt="person"></div>
-      </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="container two">
-      <div>
-        <h2>世界を前に進める表現者とは</h2>
-        <p class="desc">私たちは、AIとマーケティングの力で、まだ見ぬ価値に生きる社会、次々と事業を創造する集団です。</p>
-        <p class="sub">事業をつくる。社会を動かす。</p>
+      <div class="visual">
+        <div class="bluebar"></div>
+        <img class="portrait woman" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80" alt="woman"/>
+        <img class="portrait man" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1000&q=80" alt="man"/>
+        <div class="panel">
+          <b>AI MARKETING FUND</b><br>AIとマーケティングで事業を創る
+          <hr>
+          <b>2030 売上100億を目指す</b><br>圧倒的な成長を、仕組みでつくる
+          <hr>
+          意思決定スピード × 業務推進スピード × 事業成長スピード
+        </div>
       </div>
-      <div class="block" style="height:300px;background:linear-gradient(135deg,#eef2ff,#fff 50%,#dbe5ff);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:40px;font-weight:900">CITY + PEOPLE</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 style="font-family:sans-serif;font-size:54px;text-align:center">HADOの強み</h2>
-      <div class="cards">
-        <article class="card"><div class="icon">📈</div><div class="kicker">マーケティングに強い</div><p class="desc">データドリブンな戦略と圧倒的な実行力で、再現性のある成長を実現。</p></article>
-        <article class="card"><div class="icon">🧠</div><div class="kicker">AIへの投資を惜しまない</div><p class="desc">最先端のAIプラットフォームを積極的に活用し、新しい価値を生み出す。</p></article>
-        <article class="card"><div class="icon">⚡</div><div class="kicker">すべてが爆速</div><p class="desc">判断・実装・改善を高速で回し、最短で成果を出すチーム。</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container two">
-      <div>
-        <h2>2030年、<br>売上<span style="color:var(--blue);font-size:1.45em">100億</span>へ。</h2>
-        <p class="desc">私たちは2030年に売上100億円を目指します。高い目標が、成長を加速させます。</p>
-      </div>
-      <div class="timeline"><div class="curve"></div><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container process">
-      <div>
-        <h2 style="font-family:sans-serif;font-size:48px">M&A × 新規事業創出</h2>
-        <p class="desc">M&Aと新規事業創出を両輪に、さまざまな社会課題を解決するサービスを展開。</p>
-      </div>
-      <div class="steps">
-        <div class="step"><div class="icon">🤝</div><h3>Acquisition</h3><p class="desc">優れた事業を獲得</p></div>
-        <div class="step"><div class="icon">🌱</div><h3>Incubation</h3><p class="desc">新規事業を創出</p></div>
-        <div class="step"><div class="icon">📊</div><h3>Scale</h3><p class="desc">グロースで社会にインパクト</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 style="font-family:sans-serif;font-size:50px;text-align:center">HADOで働く魅力</h2>
-      <div class="strengths">
-        <div class="strength"><div class="icon">👑</div><h3>裁量</h3><p class="desc">大きな裁量で挑戦できる。</p></div>
-        <div class="strength"><div class="icon">⏱️</div><h3>スピード</h3><p class="desc">素早い意思決定と実行。</p></div>
-        <div class="strength"><div class="icon">🏔️</div><h3>挑戦</h3><p class="desc">高い目標に挑み続ける。</p></div>
-        <div class="strength"><div class="icon">✏️</div><h3>表現力</h3><p class="desc">価値ある体験を創る。</p></div>
-        <div class="strength"><div class="icon">🧩</div><h3>最先端AI</h3><p class="desc">未来の当たり前を生む。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container cta">
-      <div class="panel"></div>
-      <div class="cta-main">
-        <h2>次の <em>HADO</em> を、<br>一緒につくろう。</h2>
-        <p class="desc">未来をつくるのは、挑戦する人。HADOで可能性を解き放とう。</p>
-      </div>
-      <div class="panel"></div>
-    </div>
-    <div class="container buttons"><a class="btn primary" href="#">募集職種を見る →</a><a class="btn secondary" href="#">カジュアル面談はこちら →</a></div>
-  </section>
-
-  <footer>
-    <div class="container footer-grid">
-      <div><div class="logo" style="font-size:48px">HADO <small>RECRUIT 2026</small></div><p class="desc">株式会社HADO</p></div>
-      <div><b>ABOUT</b></div><div><b>BUSINESS</b></div><div><b>CULTURE</b></div><div><b>PEOPLE</b></div><div><b>JOBS</b></div><div><a class="entry" href="#">ENTRY</a></div>
-    </div>
-    <div class="copyright">© HADO Inc. All Rights Reserved.</div>
-  </footer>
+    </section>
+  </div>
 </body>
 </html>
