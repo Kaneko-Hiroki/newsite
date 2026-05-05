@@ -1,165 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HADO Recruit 2026</title>
-  <style>
-    :root{--blue:#1147ff;--ink:#10131f;--muted:#6a7188;--line:#e8ebf5;--bg:#f8f9fd}
-    *{box-sizing:border-box} body{margin:0;font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:white}
-    .container{width:min(1180px,92vw);margin-inline:auto}
-    header{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);z-index:30;border-bottom:1px solid #f0f2f8}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{font-weight:900;color:var(--blue);font-size:42px;letter-spacing:.04em}.logo small{font-size:18px;margin-left:8px;font-weight:700}
-    .menu{display:flex;gap:30px;align-items:center;font-size:13px;font-weight:800}
-    .menu a{color:#222;text-decoration:none}.entry{background:var(--blue);color:#fff!important;padding:18px 24px;border-radius:2px}
-
-    .hero{background:linear-gradient(130deg,#fff 55%,#f4f7ff 100%);padding:48px 0 26px;position:relative;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:end}
-    .title{font-family:serif;font-size:96px;line-height:1.03;margin:0 0 24px;letter-spacing:.01em}
-    .underline{height:7px;background:var(--blue);width:88%;border-radius:9px;transform:rotate(-5deg);margin-bottom:30px}
-    .chips{display:flex;gap:10px;flex-wrap:wrap}.chip{background:#0a1020;color:#fff;padding:8px 12px;font-size:18px;font-weight:700}
-    .lead{margin-top:26px;color:#2a3044;font-size:24px;line-height:1.8}
-    .brush{font-size:92px;color:var(--blue);font-weight:900;font-family:cursive;opacity:.9;margin-top:26px}
-    .photo-montage{position:relative;height:620px;background:radial-gradient(circle at 70% 30%,#1f58ff 0 90px,transparent 91px),linear-gradient(160deg,#d8e3ff,transparent 50%);border:1px solid #d8dff8}
-    .person{position:absolute;bottom:0;filter:grayscale(1) contrast(1.12)}
-    .p1{left:28%;height:95%}.p2{right:2%;height:66%}.p3{left:2%;height:55%}
-    .person img{height:100%;width:auto;object-fit:cover}
-
-    section{padding:74px 0;border-top:1px solid var(--line)}
-    h2{font-size:52px;margin:0 0 16px;font-family:serif}.sub{font-size:56px;color:var(--blue);font-family:serif;margin:10px 0}
-    .two{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
-    .block{background:#fff;border:1px solid var(--line);padding:30px}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:#fff;border:1px solid var(--line);padding:36px 24px;min-height:230px;text-align:center}
-    .icon{font-size:42px;color:var(--blue)}
-    .kicker{font-size:18px;font-weight:800;margin:12px 0}.desc{color:#3c445f;line-height:1.8}
-    .timeline{height:320px;border:1px solid var(--line);background:linear-gradient(0deg,#f5f7ff,#fff);position:relative;overflow:hidden}
-    .curve{position:absolute;left:10%;right:6%;bottom:70px;height:150px;border-bottom:5px solid var(--blue);border-right:5px solid var(--blue);border-radius:0 0 220px 0}
-    .dot{position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid var(--blue)}
-    .d1{left:18%;bottom:64px}.d2{left:44%;bottom:96px}.d3{left:70%;bottom:132px}
-    .process{display:grid;grid-template-columns:1.1fr 2fr;gap:20px;align-items:center}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{border:1px solid var(--line);padding:22px;text-align:center}
-    .strengths{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.strength{border:1px solid var(--line);padding:20px;text-align:center;min-height:190px}
-    .cta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:end}
-    .cta .panel{min-height:220px;background:#eef2ff;border:1px solid var(--line)}
-    .cta-main{padding:20px;border:1px solid var(--line);min-height:220px;display:flex;flex-direction:column;justify-content:center}
-    .buttons{display:flex;gap:12px;margin-top:20px}.btn{padding:14px 24px;border:2px solid var(--blue);font-weight:800;text-decoration:none}.btn.primary{background:var(--blue);color:white}.btn.secondary{color:var(--blue)}
-    footer{border-top:1px solid var(--line);padding:24px 0 0}.footer-grid{display:grid;grid-template-columns:2fr repeat(6,1fr);gap:16px;align-items:start}.copyright{background:#090b11;color:#fff;text-align:center;padding:11px;margin-top:18px}
-
-    @media (max-width: 980px){
-      .menu{display:none}.hero-grid,.two,.process{grid-template-columns:1fr}
-      .title{font-size:62px}.cards{grid-template-columns:1fr}.strengths{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
-      .photo-montage{height:420px}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <div class="logo">HADO <small>RECRUIT 2026</small></div>
-      <nav class="menu">
-        <a href="#">ABOUT</a><a href="#">BUSINESS</a><a href="#">CULTURE</a><a href="#">PEOPLE</a><a href="#">JOBS</a><a class="entry" href="#">ENTRY</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero" style="border-top:none">
-    <div class="container hero-grid">
-      <div>
-        <h1 class="title">世界を<br>前に進める<br>表現者へ</h1>
-        <div class="underline"></div>
-        <p class="lead"><b style="color:var(--blue)">HADO</b> は、<b style="color:var(--blue)">AI MARKETING FUND</b>になる。</p>
-        <div class="chips"><span class="chip">AI</span><span class="chip">Marketing</span><span class="chip">new Ventures</span></div>
-        <p class="lead" style="font-size:22px">AIとマーケティングの力で、いろんな事業を創造していく。</p>
-        <div class="brush">HADO</div>
-      </div>
-      <div class="photo-montage">
-        <div class="person p1"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="person"></div>
-        <div class="person p2"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="person"></div>
-        <div class="person p3"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=420&q=80" alt="person"></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container two">
-      <div>
-        <h2>世界を前に進める表現者とは</h2>
-        <p class="desc">私たちは、AIとマーケティングの力で、まだ見ぬ価値に生きる社会、次々と事業を創造する集団です。</p>
-        <p class="sub">事業をつくる。社会を動かす。</p>
-      </div>
-      <div class="block" style="height:300px;background:linear-gradient(135deg,#eef2ff,#fff 50%,#dbe5ff);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:40px;font-weight:900">CITY + PEOPLE</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 style="font-family:sans-serif;font-size:54px;text-align:center">HADOの強み</h2>
-      <div class="cards">
-        <article class="card"><div class="icon">📈</div><div class="kicker">マーケティングに強い</div><p class="desc">データドリブンな戦略と圧倒的な実行力で、再現性のある成長を実現。</p></article>
-        <article class="card"><div class="icon">🧠</div><div class="kicker">AIへの投資を惜しまない</div><p class="desc">最先端のAIプラットフォームを積極的に活用し、新しい価値を生み出す。</p></article>
-        <article class="card"><div class="icon">⚡</div><div class="kicker">すべてが爆速</div><p class="desc">判断・実装・改善を高速で回し、最短で成果を出すチーム。</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container two">
-      <div>
-        <h2>2030年、<br>売上<span style="color:var(--blue);font-size:1.45em">100億</span>へ。</h2>
-        <p class="desc">私たちは2030年に売上100億円を目指します。高い目標が、成長を加速させます。</p>
-      </div>
-      <div class="timeline"><div class="curve"></div><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container process">
-      <div>
-        <h2 style="font-family:sans-serif;font-size:48px">M&A × 新規事業創出</h2>
-        <p class="desc">M&Aと新規事業創出を両輪に、さまざまな社会課題を解決するサービスを展開。</p>
-      </div>
-      <div class="steps">
-        <div class="step"><div class="icon">🤝</div><h3>Acquisition</h3><p class="desc">優れた事業を獲得</p></div>
-        <div class="step"><div class="icon">🌱</div><h3>Incubation</h3><p class="desc">新規事業を創出</p></div>
-        <div class="step"><div class="icon">📊</div><h3>Scale</h3><p class="desc">グロースで社会にインパクト</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 style="font-family:sans-serif;font-size:50px;text-align:center">HADOで働く魅力</h2>
-      <div class="strengths">
-        <div class="strength"><div class="icon">👑</div><h3>裁量</h3><p class="desc">大きな裁量で挑戦できる。</p></div>
-        <div class="strength"><div class="icon">⏱️</div><h3>スピード</h3><p class="desc">素早い意思決定と実行。</p></div>
-        <div class="strength"><div class="icon">🏔️</div><h3>挑戦</h3><p class="desc">高い目標に挑み続ける。</p></div>
-        <div class="strength"><div class="icon">✏️</div><h3>表現力</h3><p class="desc">価値ある体験を創る。</p></div>
-        <div class="strength"><div class="icon">🧩</div><h3>最先端AI</h3><p class="desc">未来の当たり前を生む。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container cta">
-      <div class="panel"></div>
-      <div class="cta-main">
-        <h2>次の <em>HADO</em> を、<br>一緒につくろう。</h2>
-        <p class="desc">未来をつくるのは、挑戦する人。HADOで可能性を解き放とう。</p>
-      </div>
-      <div class="panel"></div>
-    </div>
-    <div class="container buttons"><a class="btn primary" href="#">募集職種を見る →</a><a class="btn secondary" href="#">カジュアル面談はこちら →</a></div>
-  </section>
-
-  <footer>
-    <div class="container footer-grid">
-      <div><div class="logo" style="font-size:48px">HADO <small>RECRUIT 2026</small></div><p class="desc">株式会社HADO</p></div>
-      <div><b>ABOUT</b></div><div><b>BUSINESS</b></div><div><b>CULTURE</b></div><div><b>PEOPLE</b></div><div><b>JOBS</b></div><div><a class="entry" href="#">ENTRY</a></div>
-    </div>
-    <div class="copyright">© HADO Inc. All Rights Reserved.</div>
-  </footer>
-</body>
-</html>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HADO RECRUITING</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans JP",sans-serif;background:#fff}
+:root{--b:#0b35ea;--line:#cfd8ff}
+.wrap{width:1680px;height:941px;position:relative;overflow:hidden;background:#fff;margin:0 auto}
+header{height:73px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 46px;position:relative;z-index:5}
+.logo{font-size:46px;font-weight:800;letter-spacing:.11em}
+nav{display:flex;height:100%}nav a{padding:15px 35px 0;text-decoration:none;color:#111;font-weight:700;font-size:30px;line-height:1.1}nav small{display:block;font-size:28%;font-weight:600;margin-top:8px}
+.entry{background:var(--b);color:#fff;min-width:190px;position:relative}.entry:after{content:"→";position:absolute;right:22px;top:18px;font-size:36px}
+.hero{position:absolute;inset:73px 0 0 0}
+.left{position:absolute;left:82px;top:78px;width:760px;z-index:3}
+.k{color:var(--b);font-size:36px;font-weight:800}.k:after{content:"";display:block;width:46px;height:6px;background:var(--b);margin-top:16px}
+.titleimg{margin-top:34px;font-family:"Yu Mincho",serif;font-size:96px;line-height:1.04}
+.under{height:14px;width:530px;border-radius:50px;background:var(--b);transform:rotate(-5deg);margin-top:-8px}
+.lead{font-size:43px;line-height:1.5;margin:52px 0 0}.lead b{color:var(--b)}
+.tag{display:inline-block;background:#02040a;color:#fff;padding:7px 16px;font-size:39px;margin-top:16px}
+.btns{display:flex;gap:28px;margin-top:34px}.btn{width:330px;height:76px;border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700;text-decoration:none}.p{background:var(--b);color:#fff}.s{color:var(--b)}
+.btn span{margin-left:40px}
+.right{position:absolute;right:0;top:0;width:960px;height:100%}
+.bluecol{position:absolute;left:322px;top:0;height:630px;width:182px;background:var(--b)}
+.man,.woman{position:absolute;bottom:0;filter:grayscale(1) contrast(1.12)}
+.woman{left:90px;height:700px}.man{right:72px;height:860px}
+.rect{position:absolute;border:1px solid #95a8ff;opacity:.85}.r1{left:200px;top:18px;width:430px;height:740px}.r2{left:-18px;top:387px;width:420px;height:495px}.r3{left:204px;top:348px;width:688px;height:572px;transform:rotate(45deg)}
+.dots{position:absolute;width:230px;height:150px;background-image:radial-gradient(#9cb0ff 1.5px,transparent 1.5px);background-size:20px 20px}.d1{left:5px;top:50px}.d2{right:38px;top:116px}.d3{left:106px;top:580px}
+.splash{position:absolute;left:-100px;bottom:-70px;width:830px;height:430px;border-radius:52% 48% 45% 55%/72% 50% 50% 28%;background:radial-gradient(circle at 50% 60%, rgba(20,74,255,.95) 0 28%, rgba(20,74,255,.7) 42%, rgba(20,74,255,.2) 70%, transparent 74%);filter:blur(1.1px)}
+.panel{position:absolute;right:94px;bottom:62px;width:480px;background:rgba(0,0,0,.58);border:1px solid rgba(200,209,255,.4);color:#fff;padding:20px 26px;font-size:38px;line-height:1.45}
+.panel hr{border:none;border-top:1px solid rgba(255,255,255,.24);margin:12px 0}
+@media (max-width:1680px){.wrap{width:100vw;height:calc(100vw*0.56)}body{overflow-x:hidden}}
+</style>
+</head><body>
+<div class="wrap">
+<header><div class="logo">HADO</div><nav>
+<a href="#">ABOUT<small>私たちについて</small></a><a href="#">CULTURE<small>カルチャー</small></a><a href="#">WORK<small>事業・仕事を知る</small></a><a href="#">MEMBER<small>メンバー紹介</small></a><a class="entry" href="#">ENTRY<small>エントリー</small></a>
+</nav></header>
+<section class="hero"><div class="left"><div class="k">HADO RECRUITING</div><div class="titleimg">世界を前に進める<br>表現者へ。</div><div class="under"></div>
+<p class="lead"><b>HADO</b>は、<b>AI MARKETING FUND</b>へ。<br>AIとマーケティングの力で事業を創造し、<br>爆速で意思決定し、爆速で成長する。<br>M&A・新規事業創出を通じて、社会課題を解く。</p>
+<div class="tag">AI × Marketing × New Ventures</div><div class="btns"><a class="btn p" href="#">募集職種を見る<span>→</span></a><a class="btn s" href="#">会社を知る<span>→</span></a></div></div>
+<div class="right"><div class="bluecol"></div><div class="dots d1"></div><div class="dots d2"></div><div class="dots d3"></div><div class="rect r1"></div><div class="rect r2"></div><div class="rect r3"></div>
+<img class="woman" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80"><img class="man" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80"><div class="panel">AI MARKETING FUND<br>AIとマーケティングで事業を創る<hr>2030 売上100億を目指す<br>圧倒的な成長を、仕組みでつくる<hr>意思決定スピード × 業務推進スピード × 事業成長スピード</div></div>
+<div class="splash"></div></section></div>
+</body></html>
