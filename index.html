@@ -3,59 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HADO Recruiting Mock</title>
+  <title>HADO Recruiting</title>
   <style>
-    :root{--blue:#0a36e8;--line:#d6dcf6;--text:#0c0c13}
-    *{box-sizing:border-box}
-    body{margin:0;background:#fff;color:var(--text);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
-    .page{width:100%;min-height:100vh;overflow:hidden;position:relative}
-    header{height:82px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 48px;background:#fff}
-    .logo{font-weight:800;letter-spacing:.12em;font-size:52px;line-height:1}
-    .nav{display:flex;align-items:stretch;height:100%}
-    .nav a{display:flex;flex-direction:column;justify-content:center;padding:0 26px;text-decoration:none;color:#111;font-weight:700;font-size:35px;line-height:1.05}
-    .nav small{font-size:13px;font-weight:600;margin-top:8px}
-    .entry{background:var(--blue)!important;color:#fff!important;min-width:170px;position:relative}
-    .entry::after{content:"→";position:absolute;right:18px;top:26px;font-size:32px}
+    /* ===== v1.0.0: design tokens ===== */
+    :root {
+      --blue: #0b39ea;
+      --line: #d7defa;
+      --text: #0f1117;
+      --muted: #3a3e4e;
+      --bg: #fdfdff;
+    }
 
-    .hero{position:relative;height:calc(100vh - 82px);min-height:860px;padding:68px 68px 40px;background:#fff}
-    .dots{position:absolute;width:220px;height:160px;background-image:radial-gradient(#9ab0ff 1.4px,transparent 1.4px);background-size:20px 20px;opacity:.95}
-    .d1{top:54px;left:51%}.d2{top:370px;left:57%}.d3{top:120px;right:90px}
-    .wire,.wire2,.wire3{position:absolute;border:1px solid #9bb0ff;opacity:.8}
-    .wire{right:334px;top:18px;width:540px;height:890px}
-    .wire2{left:46%;top:420px;width:420px;height:630px}
-    .wire3{left:58%;bottom:-130px;width:680px;height:680px;transform:rotate(45deg)}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    }
 
-    .left{position:relative;z-index:2;max-width:760px}
-    .eyebrow{color:var(--blue);font-size:40px;font-weight:800;letter-spacing:.03em}
-    .eyebrow::after{content:"";display:block;width:42px;height:6px;background:var(--blue);margin-top:18px}
-    h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:132px;line-height:1.02;letter-spacing:.02em;margin:42px 0 20px;font-weight:500}
-    .brush{height:16px;width:530px;background:var(--blue);border-radius:50px;transform:rotate(-5deg);margin:-22px 0 44px}
-    .lead{font-size:49px;line-height:1.35;margin:0 0 12px;font-weight:500}
-    .lead strong{color:var(--blue);font-weight:800}
-    .sub{font-size:43px;line-height:1.6;margin:0}
-    .tag{display:inline-block;margin-top:26px;background:#05070d;color:#fff;padding:8px 14px;font-size:46px;letter-spacing:.02em}
-    .buttons{display:flex;gap:26px;margin-top:52px}
-    .btn{font-size:40px;font-weight:700;padding:24px 54px;min-width:450px;text-decoration:none;display:flex;justify-content:center;align-items:center;border:2px solid var(--blue)}
-    .primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:var(--blue)}
-    .btn span{margin-left:auto;font-size:58px;line-height:0.8}
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    }
 
-    .visual{position:absolute;right:-24px;bottom:0;width:58%;height:100%;z-index:1}
-    .bluebar{position:absolute;left:31%;top:0;bottom:0;width:210px;background:var(--blue)}
-    .portrait{position:absolute;bottom:0;filter:grayscale(1) contrast(1.1);object-fit:cover}
-    .woman{height:80%;left:4%}.man{height:96%;right:0}
-    .panel{position:absolute;right:60px;bottom:96px;width:470px;background:rgba(0,0,0,.56);color:#fff;border:1px solid rgba(180,196,255,.4);padding:18px 22px;font-size:21px;line-height:1.6}
-    .panel hr{border:none;border-top:1px solid rgba(255,255,255,.25);margin:14px 0}
+    /* ===== v1.1.0: header ===== */
+    .site-header {
+      height: 74px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-left: 40px;
+      background: #fff;
+      position: relative;
+      z-index: 20;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      letter-spacing: .1em;
+      font-size: 48px;
+      font-weight: 800;
+    }
+    .nav { display: flex; }
+    .nav a {
+      text-decoration: none;
+      color: #111;
+      padding: 0 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 33px;
+      line-height: 1;
+      font-weight: 700;
+    }
+    .nav small {
+      font-size: 12px;
+      margin-top: 8px;
+      color: #222;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .nav .entry {
+      background: var(--blue);
+      color: #fff;
+      min-width: 220px;
+      position: relative;
+    }
+    .nav .entry small { color: #fff; }
+    .nav .entry::after {
+      content: "→";
+      position: absolute;
+      right: 26px;
+      top: 22px;
+      font-size: 35px;
+      font-weight: 500;
+    }
 
-    @media (max-width:1200px){
-      .logo{font-size:40px}.nav a{font-size:24px}
-      h1{font-size:86px}.lead{font-size:34px}.sub{font-size:29px}.tag,.btn{font-size:28px}
-      .hero{min-height:680px}.buttons{flex-direction:column}.btn{min-width:320px}
+    /* ===== v1.2.0: hero layout ===== */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 74px);
+      padding: 70px 0 35px 74px;
+      isolation: isolate;
+    }
+    .left {
+      position: relative;
+      z-index: 6;
+      width: 58%;
+      max-width: 950px;
+    }
+    .eyebrow {
+      color: var(--blue);
+      font-size: 44px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: .02em;
+    }
+    .eyebrow::after {
+      content: "";
+      width: 50px;
+      height: 6px;
+      background: var(--blue);
+      display: block;
+      margin-top: 17px;
+    }
+    .title-image {
+      width: min(86%, 1020px);
+      margin-top: 36px;
+      display: block;
+    }
+    .lead {
+      margin: 34px 0 8px;
+      font-size: 50px;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+    .lead strong { color: var(--blue); font-weight: 800; }
+    .sub {
+      margin: 0;
+      font-size: 43px;
+      line-height: 1.62;
+      color: #1a1d27;
+      letter-spacing: .01em;
+    }
+    .tag {
+      margin-top: 24px;
+      display: inline-block;
+      background: #07080f;
+      color: #fff;
+      font-size: 43px;
+      letter-spacing: .04em;
+      padding: 7px 16px;
+    }
+    .buttons {
+      margin-top: 44px;
+      display: flex;
+      gap: 28px;
+      padding-bottom: 20px;
+    }
+    .btn {
+      min-width: 430px;
+      height: 110px;
+      border: 2px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 42px;
+      font-weight: 700;
+      position: relative;
+    }
+    .btn .arrow {
+      position: absolute;
+      right: 34px;
+      font-size: 52px;
+      line-height: .7;
+      font-weight: 400;
+    }
+    .btn.primary { background: var(--blue); color: #fff; }
+    .btn.secondary { color: var(--blue); background: #fff; }
+
+    /* ===== v1.3.0: right visual ===== */
+    .visual {
+      position: absolute;
+      right: -60px;
+      top: 0;
+      width: 58%;
+      height: 100%;
+      z-index: 2;
+      background: url('https://images.unsplash.com/photo-1541216970279-affbfdd55aa2?auto=format&fit=crop&w=1500&q=80') right center / cover no-repeat;
+      filter: grayscale(1) contrast(1.1);
+      clip-path: inset(0 0 0 12%);
+    }
+    .visual::before {
+      content: "";
+      position: absolute;
+      left: 28%;
+      top: 0;
+      width: 190px;
+      height: 70%;
+      background: var(--blue);
+      mix-blend-mode: multiply;
+      opacity: .95;
+    }
+    .visual::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 220px;
+      height: 280px;
+      background: var(--blue);
+      clip-path: polygon(0 0,100% 0,100% 100%,20% 70%);
+      opacity: .9;
+    }
+
+    /* decorative lines */
+    .dots { position: absolute; width: 220px; height: 160px; background-image: radial-gradient(#9db3ff 1.4px, transparent 1.4px); background-size: 20px 20px; opacity: .95; z-index: 3; }
+    .d1 { left: 51%; top: 56px; }
+    .d2 { right: 66px; top: 126px; }
+    .d3 { right: 78px; top: 420px; }
+    .wire, .wire2, .wire3 {
+      position: absolute;
+      border: 1px solid #9cb2ff;
+      opacity: .8;
+      z-index: 3;
+    }
+    .wire { right: 250px; top: 16px; width: 560px; height: 900px; }
+    .wire2 { left: 52%; top: 420px; width: 450px; height: 620px; }
+    .wire3 { right: -210px; top: 130px; width: 860px; height: 860px; transform: rotate(45deg); }
+
+    .splash {
+      position: absolute;
+      left: -120px;
+      bottom: -170px;
+      width: 66%;
+      height: 52%;
+      background: radial-gradient(circle at 32% 25%, rgba(13,64,238,.8) 0%, rgba(13,64,238,.7) 28%, rgba(13,64,238,.2) 49%, rgba(13,64,238,0) 70%);
+      z-index: 1;
+      filter: blur(2px);
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <header>
+    <header class="site-header">
       <div class="logo">HADO</div>
       <nav class="nav">
         <a href="#">ABOUT<small>私たちについて</small></a>
@@ -66,35 +242,29 @@
       </nav>
     </header>
 
-    <section class="hero">
-      <div class="dots d1"></div><div class="dots d2"></div><div class="dots d3"></div>
-      <div class="wire"></div><div class="wire2"></div><div class="wire3"></div>
-      <div class="left">
-        <p class="eyebrow">HADO RECRUITING</p>
-        <h1>世界を前に進める<br>表現者へ。</h1>
-        <div class="brush"></div>
-        <p class="lead"><strong>HADO</strong> は、 <strong>AI MARKETING FUND</strong>へ。</p>
-        <p class="sub">AIとマーケティングの力で事業を創造し、<br>爆速で意思決定し、爆速で成長する。<br>M&A・新規事業創出を通じて、社会課題を解く。</p>
-        <div class="tag">AI × Marketing × New Ventures</div>
-        <div class="buttons">
-          <a class="btn primary" href="#">募集職種を見る <span>→</span></a>
-          <a class="btn secondary" href="#">会社を知る <span>→</span></a>
-        </div>
-      </div>
+    <main class="hero">
+      <div class="visual" aria-hidden="true"></div>
+      <div class="dots d1" aria-hidden="true"></div>
+      <div class="dots d2" aria-hidden="true"></div>
+      <div class="dots d3" aria-hidden="true"></div>
+      <div class="wire" aria-hidden="true"></div>
+      <div class="wire2" aria-hidden="true"></div>
+      <div class="wire3" aria-hidden="true"></div>
+      <div class="splash" aria-hidden="true"></div>
 
-      <div class="visual">
-        <div class="bluebar"></div>
-        <img class="portrait woman" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80" alt="woman"/>
-        <img class="portrait man" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1000&q=80" alt="man"/>
-        <div class="panel">
-          <b>AI MARKETING FUND</b><br>AIとマーケティングで事業を創る
-          <hr>
-          <b>2030 売上100億を目指す</b><br>圧倒的な成長を、仕組みでつくる
-          <hr>
-          意思決定スピード × 業務推進スピード × 事業成長スピード
+      <section class="left">
+        <p class="eyebrow">HADO RECRUITING</p>
+        <img class="title-image" src="https://dummyimage.com/1200x500/ffffff/111111.png&text=%E4%B8%96%E7%95%8C%E3%82%92%E5%89%8D%E3%81%AB%E9%80%B2%E3%82%81%E3%82%8B%0A%E8%A1%A8%E7%8F%BE%E8%80%85%E3%81%B8%E3%80%82" alt="世界を前に進める表現者へ。" />
+        <p class="lead"><strong>HADO</strong> は、 <strong>AI MARKETING FUND</strong>へ。</p>
+        <p class="sub">AIとマーケティングの力で事業を創造し、<br />爆速で意思決定し、爆速で成長する。<br />M&amp;A・新規事業創出を通じて、社会課題を解く。</p>
+        <div class="tag">AI × Marketing × New Ventures</div>
+
+        <div class="buttons">
+          <a class="btn primary" href="#">募集職種を見る <span class="arrow">→</span></a>
+          <a class="btn secondary" href="#">会社を知る <span class="arrow">→</span></a>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   </div>
 </body>
 </html>
